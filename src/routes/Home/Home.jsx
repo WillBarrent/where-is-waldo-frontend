@@ -1,30 +1,52 @@
 import styles from "./Home.module.css";
-import WaldoIcon from "../../assets/waldo-icon.png";
+import Header from "../../components/Header/Header";
+import { useLoaderData } from "react-router-dom";
+
+export async function puzzlesLoader() {
+  const data = await fetch("http://localhost:3000/puzzles", {
+    mode: "cors",
+  });
+  const puzzles = await data.json();
+
+  return { puzzles };
+}
 
 function Home() {
+  const { puzzles } = useLoaderData();
+
   return (
     <div className={styles.home}>
-      <header className={styles.header}>
-        <div className={styles.headerIcon}>
-          <img
-            className={styles.headerIconImg}
-            width={100}
-            src={WaldoIcon}
-            alt=""
-          />
-          <div className={styles.headerTitle}>
-            <span className={styles.headerTitlePrimary}>Where's </span>
-            <span className={styles.headerTitleSecondary}>Waldo?</span>
+      <Header />
+
+      {puzzles.length !== 0 ? <PuzzleList puzzles={puzzles} /> : <></>}
+    </div>
+  );
+}
+
+function PuzzleList({ puzzles }) {
+  return (
+    <div className={styles.puzzles}>
+      {puzzles.map((puzzle) => {
+        return (
+          <div key={puzzle.id} className={styles.puzzle}>
+            <img className={styles.puzzleImg} src={puzzle.imageUrl} alt="" />
+            <h2 className={styles.puzzleNumber}>Puzzle {puzzle.id}</h2>
+            <div className={styles.characters}>
+              {puzzle.characters.map((character) => {
+                return (
+                  <div key={character.id} className={styles.character}>
+                    <img
+                      className={styles.characterImg}
+                      src={character.imageUrl}
+                      alt=""
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-        
-        <nav className={styles.nav}>
-          <ul className={styles.navList}>
-            <li className={styles.navListItem}>Home</li>
-            <li className={styles.navListItem}>Leaderboard</li>
-          </ul>
-        </nav>
-      </header>
+        );
+      })}
     </div>
   );
 }
