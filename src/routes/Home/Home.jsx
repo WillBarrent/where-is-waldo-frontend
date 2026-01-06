@@ -1,6 +1,5 @@
 import styles from "./Home.module.css";
-import Header from "../../components/Header/Header";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 export async function puzzlesLoader() {
   const data = await fetch("http://localhost:3000/puzzles", {
@@ -16,8 +15,6 @@ function Home() {
 
   return (
     <div className={styles.home}>
-      <Header />
-
       {puzzles.length !== 0 ? <PuzzleList puzzles={puzzles} /> : <></>}
     </div>
   );
@@ -29,7 +26,9 @@ function PuzzleList({ puzzles }) {
       {puzzles.map((puzzle) => {
         return (
           <div key={puzzle.id} className={styles.puzzle}>
-            <img className={styles.puzzleImg} src={puzzle.imageUrl} alt="" />
+            <Link to={"/puzzles/" + puzzle.id}>
+              <img className={styles.puzzleImg} src={puzzle.imageUrl} alt="" />
+            </Link>
             <h2 className={styles.puzzleNumber}>Puzzle {puzzle.id}</h2>
             <div className={styles.characters}>
               {puzzle.characters.map((character) => {
