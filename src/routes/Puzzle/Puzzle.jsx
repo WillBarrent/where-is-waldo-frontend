@@ -1,7 +1,12 @@
-import { useState } from "react";
 import styles from "./Puzzle.module.css";
+
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import useSound from "use-sound";
+
 import CorrectIcon from "../../assets/correct.png";
+import WrongSound from "../../assets/wrong.mp3";
+import CorrectSound from "../../assets/correct.mp3";
 
 export async function puzzleByIdLoader({ params }) {
   const puzzleId = params.puzzleId;
@@ -15,6 +20,9 @@ export async function puzzleByIdLoader({ params }) {
 
 function Puzzle() {
   const { puzzle } = useLoaderData();
+
+  const [playWrong] = useSound(WrongSound);
+  const [playCorrect] = useSound(CorrectSound);
 
   const [characters, setCharacters] = useState(
     puzzle.characters.map((character) => {
@@ -56,6 +64,7 @@ function Puzzle() {
     }
 
     if (inside) {
+      playCorrect();
       setCharacters(
         characters.map((ch) => {
           if (character[0].id === ch.id) {
@@ -70,6 +79,8 @@ function Puzzle() {
           };
         })
       );
+    } else {
+      playWrong();
     }
   }
 
