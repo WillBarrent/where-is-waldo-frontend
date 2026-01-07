@@ -149,7 +149,9 @@ function Puzzle() {
             className={styles.targetBox}
           >
             {characters.map((character) => {
-              return (
+              return character.isFound === true ? (
+                <></>
+              ) : (
                 <div
                   key={character.id}
                   className={styles.targetBoxCharacterWrapper}
