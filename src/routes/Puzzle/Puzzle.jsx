@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./Puzzle.module.css";
 import { useLoaderData } from "react-router-dom";
+import CorrectIcon from "../../assets/correct.png";
 
 export async function puzzleByIdLoader({ params }) {
   const puzzleId = params.puzzleId;
@@ -14,8 +15,15 @@ export async function puzzleByIdLoader({ params }) {
 
 function Puzzle() {
   const { puzzle } = useLoaderData();
-  const characters = puzzle.characters;
 
+  const [characters, setCharacters] = useState(
+    puzzle.characters.map((character) => {
+      return {
+        ...character,
+        isFound: false,
+      };
+    })
+  );
   const [tagged, setTagged] = useState(false);
 
   function onCharacterSelect(characterName) {
@@ -47,7 +55,22 @@ function Puzzle() {
       }
     }
 
-    console.log(inside ? "Correct" : "Not correct");
+    if (inside) {
+      setCharacters(
+        characters.map((ch) => {
+          if (character[0].id === ch.id) {
+            return {
+              ...ch,
+              isFound: inside,
+            };
+          }
+
+          return {
+            ...ch,
+          };
+        })
+      );
+    }
   }
 
   return puzzle !== null ? (
@@ -62,12 +85,26 @@ function Puzzle() {
       <div className={styles.characters}>
         {characters.map((character) => {
           return (
-            <div className={styles.character}>
+            <div
+              key={character.id}
+              className={
+                character.isFound ? styles.characterFound : styles.character
+              }
+            >
               <img
                 className={styles.characterImg}
                 src={character.imageUrl}
                 alt=""
               />
+              {character.isFound ? (
+                <img
+                  className={styles.characterCorrectIcon}
+                  src={CorrectIcon}
+                  alt=""
+                />
+              ) : (
+                <></>
+              )}
             </div>
           );
         })}
@@ -102,7 +139,10 @@ function Puzzle() {
           >
             {characters.map((character) => {
               return (
-                <div className={styles.targetBoxCharacterWrapper}>
+                <div
+                  key={character.id}
+                  className={styles.targetBoxCharacterWrapper}
+                >
                   <div
                     onClick={() => {
                       onCharacterSelect(character.name);

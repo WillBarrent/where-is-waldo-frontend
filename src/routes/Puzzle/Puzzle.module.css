@@ -20,6 +20,19 @@
   justify-content: center;
 }
 
+.characterFound {
+  border: 2px solid #adb5bd;
+  border-radius: 10px;
+  position: relative;
+}
+
+.characterCorrectIcon {
+  width: 30px;
+  position: absolute;
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
 .targetBox {
   position: absolute;
 
