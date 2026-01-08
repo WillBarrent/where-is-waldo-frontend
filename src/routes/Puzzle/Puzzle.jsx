@@ -4,9 +4,10 @@ import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import useSound from "use-sound";
 
-import CorrectIcon from "../../assets/correct.png";
 import WrongSound from "../../assets/wrong.mp3";
 import CorrectSound from "../../assets/correct.mp3";
+import PuzzleImage from "../../components/PuzzleImage/PuzzleImage";
+import Character from "../../components/Character/Character";
 
 export async function puzzleByIdLoader({ params }) {
   const puzzleId = params.puzzleId;
@@ -95,90 +96,17 @@ function Puzzle() {
     >
       <div className={styles.characters}>
         {characters.map((character) => {
-          return (
-            <div
-              key={character.id}
-              className={
-                character.isFound ? styles.characterFound : styles.character
-              }
-            >
-              <img
-                className={styles.characterImg}
-                src={character.imageUrl}
-                alt=""
-              />
-              {character.isFound ? (
-                <img
-                  className={styles.characterCorrectIcon}
-                  src={CorrectIcon}
-                  alt=""
-                />
-              ) : (
-                <></>
-              )}
-            </div>
-          );
+          return <Character key={character.id} character={character} />;
         })}
       </div>
 
-      <div
-        onClick={(e) => {
-          setTagged({
-            x: e.nativeEvent.offsetX,
-            y: e.nativeEvent.offsetY,
-            center: { x: e.target.width / 2, y: e.target.height / 2 },
-          });
-        }}
-        className={styles.puzzleImgContainer}
-      >
-        <img className={styles.puzzleImg} src={puzzle.imageUrl} alt="" />
-        {tagged ? (
-          <div
-            style={{
-              left: tagged.x,
-              top: tagged.y,
-              transform:
-                tagged.x <= tagged.center.x && tagged.y <= tagged.center.y
-                  ? "translate(0, 0)"
-                  : tagged.x > tagged.center.x && tagged.y < tagged.center.y
-                  ? "translate(-100%, 0)"
-                  : tagged.x < tagged.center.x && tagged.y > tagged.center.y
-                  ? "translate(0, -100%)"
-                  : "translate(-100%, -100%)",
-            }}
-            className={styles.targetBox}
-          >
-            {characters.map((character) => {
-              return character.isFound === true ? (
-                <></>
-              ) : (
-                <div
-                  key={character.id}
-                  className={styles.targetBoxCharacterWrapper}
-                >
-                  <div
-                    onClick={() => {
-                      onCharacterSelect(character.name);
-                    }}
-                    className={styles.targetBoxCharacter}
-                  >
-                    <img
-                      className={styles.targetBoxCharacterImg}
-                      src={character.imageUrl}
-                      alt=""
-                    />
-                    <div className={styles.targetBoxCharacterName}>
-                      {character.name}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <></>
-        )}
-      </div>
+      <PuzzleImage
+        puzzle={puzzle}
+        characters={characters}
+        tagged={tagged}
+        setTagged={setTagged}
+        onCharacterSelect={onCharacterSelect}
+      />
     </div>
   ) : (
     <></>

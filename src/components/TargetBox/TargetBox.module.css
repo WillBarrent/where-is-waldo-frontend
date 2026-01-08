@@ -1,0 +1,34 @@
+.targetBox {
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+
+  border-radius: 10px;
+  box-shadow: 0px 7px 8px 2px rgba(0, 0, 0, 0.1);
+}
+
+.targetBoxCharacter {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 5px 20px;
+}
+
+.targetBoxCharacter:hover {
+  cursor: pointer;
+  background-color: rgba(211, 211, 211, 0.5);
+}
+
+.targetBoxCharacterWrapper:not(:last-child)::after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.targetBoxCharacterImg {
+  width: 30px;
+}

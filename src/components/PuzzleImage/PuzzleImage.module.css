@@ -1,0 +1,9 @@
+.puzzleImgContainer {
+  width: 100%;
+  position: relative;
+}
+
+.puzzleImg {
+  width: 100%;
+  cursor: crosshair;
+}
