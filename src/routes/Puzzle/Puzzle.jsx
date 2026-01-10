@@ -8,6 +8,7 @@ import WrongSound from "../../assets/wrong.mp3";
 import CorrectSound from "../../assets/correct.mp3";
 import PuzzleImage from "../../components/PuzzleImage/PuzzleImage";
 import Character from "../../components/Character/Character";
+import useInterval from "../../hooks/useInterval";
 
 export async function puzzleByIdLoader({ params }) {
   const puzzleId = params.puzzleId;
@@ -22,6 +23,12 @@ export async function puzzleByIdLoader({ params }) {
 function Puzzle() {
   const { puzzle } = useLoaderData();
 
+  const [timer, setTimer] = useState(0);
+
+  useInterval(() => {
+    setTimer(timer + 100);
+  }, 100);
+
   const [playWrong] = useSound(WrongSound);
   const [playCorrect] = useSound(CorrectSound);
 
@@ -30,6 +37,7 @@ function Puzzle() {
       return {
         ...character,
         isFound: false,
+        timer: 0,
       };
     })
   );
@@ -72,6 +80,7 @@ function Puzzle() {
             return {
               ...ch,
               isFound: inside,
+              timer: timer,
             };
           }
 

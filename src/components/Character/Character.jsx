@@ -12,6 +12,13 @@ function Character({ character }) {
       ) : (
         <></>
       )}
+      {character.isFound ? (
+        <div className={styles.characterFoundTime}>
+          {character.timer / 1000}s
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
