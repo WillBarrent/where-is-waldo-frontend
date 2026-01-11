@@ -9,6 +9,7 @@ import CorrectSound from "../../assets/correct.mp3";
 import PuzzleImage from "../../components/PuzzleImage/PuzzleImage";
 import Character from "../../components/Character/Character";
 import useInterval from "../../hooks/useInterval";
+import Success from "../../components/Success/Success";
 
 export async function puzzleByIdLoader({ params }) {
   const puzzleId = params.puzzleId;
@@ -103,6 +104,10 @@ function Puzzle() {
       }}
       className={styles.puzzle}
     >
+      {characters.filter((character) => !character.isFound).length === 0 && (
+        <Success />
+      )}
+
       <div className={styles.characters}>
         {characters.map((character) => {
           return <Character key={character.id} character={character} />;

@@ -1,0 +1,59 @@
+.completed {
+  position: fixed;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 1px 1px 1px 10000px rgba(0, 0, 0, 0.25);
+}
+
+.submitForm {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.yourName {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.nameInput {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  border-radius: 5px;
+  font-family: inherit;
+}
+
+.submitYourName {
+  width: 100%;
+
+  outline: none;
+  border: none;
+
+  padding: 5px;
+
+  background-color: #390099;
+  color: #fff;
+
+  font-family: inherit;
+}
+
+.backToHomeLink {
+  text-decoration: none;
+  color: #000;
+  text-align: center;
+}
+
+.backToHomeLink:hover {
+  text-decoration: underline;
+}
