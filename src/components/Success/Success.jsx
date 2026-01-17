@@ -1,11 +1,11 @@
 import styles from "./Success.module.css";
 import { Link } from "react-router-dom";
 
-function Success() {
+function Success({ completionTime }) {
   return (
     <div className={styles.completed}>
       <div className={styles.completedTitle}>
-        You've completed puzzle in 5.2 seconds. Congratulations!
+        You've completed puzzle in {completionTime} seconds. Congratulations!
       </div>
       <form action="" className={styles.submitForm}>
         <div className={styles.yourName}>
