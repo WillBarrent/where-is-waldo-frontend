@@ -25,10 +25,11 @@ function Puzzle() {
   const { puzzle } = useLoaderData();
 
   const [timer, setTimer] = useState(0);
+  const [delay, setDelay] = useState(100);
 
   useInterval(() => {
     setTimer(timer + 100);
-  }, 100);
+  }, delay);
 
   const [playWrong] = useSound(WrongSound);
   const [playCorrect] = useSound(CorrectSound);
@@ -75,6 +76,11 @@ function Puzzle() {
 
     if (inside) {
       playCorrect();
+
+      if (characters.length === 1) {
+        setDelay(null);
+      }
+
       setCharacters(
         characters.map((ch) => {
           if (character[0].id === ch.id) {
@@ -105,7 +111,7 @@ function Puzzle() {
       className={styles.puzzle}
     >
       {characters.filter((character) => !character.isFound).length === 0 && (
-        <Success />
+        <Success completionTime={timer / 1000} />
       )}
 
       <div className={styles.characters}>
