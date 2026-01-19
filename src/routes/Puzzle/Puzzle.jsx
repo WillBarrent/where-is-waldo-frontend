@@ -41,15 +41,34 @@ function Puzzle() {
         isFound: false,
         timer: 0,
       };
-    })
+    }),
   );
   const [tagged, setTagged] = useState(false);
+  const [playerId, setPlayerId] = useState(null);
 
-  function onCharacterSelect(characterName) {
+  async function onAllCharactersFound(completionTime) {
+    const data = await fetch("http://localhost:3000/leaderboard", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        puzzleId: puzzle.id,
+        completionTime: completionTime,
+      }),
+    });
+
+    const json = await data.json();
+
+    setPlayerId(json.data.playerId);
+  }
+
+  async function onCharacterSelect(characterName) {
     let inside = false;
 
     const character = characters.filter(
-      (character) => character.name === characterName
+      (character) => character.name === characterName,
     );
     const coordinates = character[0].coordinates.map((coords) => [
       coords.coordX,
@@ -78,6 +97,7 @@ function Puzzle() {
       playCorrect();
 
       if (characters.length === 1) {
+        await onAllCharactersFound(timer);
         setDelay(null);
       }
 
@@ -94,7 +114,7 @@ function Puzzle() {
           return {
             ...ch,
           };
-        })
+        }),
       );
     } else {
       playWrong();
@@ -111,7 +131,11 @@ function Puzzle() {
       className={styles.puzzle}
     >
       {characters.filter((character) => !character.isFound).length === 0 && (
-        <Success completionTime={timer / 1000} />
+        <Success
+          completionTime={timer / 1000}
+          puzzleId={puzzle.id}
+          playerId={playerId}
+        />
       )}
 
       <div className={styles.characters}>
