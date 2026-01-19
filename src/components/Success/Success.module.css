@@ -48,6 +48,11 @@
   font-family: inherit;
 }
 
+.submitYourName:hover {
+  background-color: #570fd4;
+  cursor: pointer;
+}
+
 .backToHomeLink {
   text-decoration: none;
   color: #000;
