@@ -5,6 +5,7 @@ import "./main.css";
 import Home, { puzzlesLoader } from "./routes/Home/Home";
 import Puzzle, { puzzleByIdLoader } from "./routes/Puzzle/Puzzle";
 import Root from "./routes/Root";
+import Leaderboard from "./routes/Leaderboard/Leaderboard";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
         element: <Puzzle />,
         loader: puzzleByIdLoader,
       },
+      {
+        path: "leaderboard",
+        element: <Leaderboard />,
+      },
     ],
   },
 ]);
@@ -29,5 +34,5 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>
+  </StrictMode>,
 );
