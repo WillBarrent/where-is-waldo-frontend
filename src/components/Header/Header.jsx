@@ -1,5 +1,6 @@
 import styles from "./Header.module.css";
 import WaldoIcon from "../../assets/waldo-icon.png";
+import { NavLink } from "react-router-dom";
 
 function Header() {
   return (
@@ -19,8 +20,26 @@ function Header() {
 
       <nav className={styles.nav}>
         <ul className={styles.navList}>
-          <li className={styles.navListItem}>Home</li>
-          <li className={styles.navListItem}>Leaderboard</li>
+          <li className={styles.navListItem}>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles.navListItemLinkActive : styles.navListItemLink
+              }
+              to={"/"}
+            >
+              Home
+            </NavLink>
+          </li>
+          <li className={styles.navListItem}>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles.navListItemLinkActive : styles.navListItemLink
+              }
+              to={"/leaderboard"}
+            >
+              Leaderboard
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </header>

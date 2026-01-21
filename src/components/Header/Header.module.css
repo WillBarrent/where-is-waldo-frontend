@@ -52,3 +52,21 @@
 .navListItem {
   list-style: none;
 }
+
+.navListItemLink {
+  color: #000;
+  text-decoration: none;
+}
+
+.navListItemLinkActive {
+  color: #000;
+  text-decoration: none;
+}
+
+.navListItemLinkActive::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background-color: #000;
+  margin-top: 5px;
+}
