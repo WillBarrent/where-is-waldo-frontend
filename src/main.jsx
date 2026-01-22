@@ -26,6 +26,7 @@ const router = createBrowserRouter([
       {
         path: "leaderboard",
         element: <Leaderboard />,
+        loader: puzzlesLoader,
       },
     ],
   },

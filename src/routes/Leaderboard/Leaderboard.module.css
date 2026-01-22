@@ -1,0 +1,47 @@
+.leaderboard {
+  padding: 0 20px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.choosePuzzle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.choosePuzzleDropdown {
+  font-family: inherit;
+  font-size: 15px;
+  padding: 0 10px;
+}
+
+.table {
+  margin-top: 20px;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+
+  padding: 10px;
+  background-color: #1b263b;
+  color: #fff;
+}
+
+.tableItem {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+
+  padding: 10px;
+}
+
+.tableItem:nth-of-type(odd) {
+    background-color: #e9ecef;
+}
