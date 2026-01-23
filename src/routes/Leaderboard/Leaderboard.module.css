@@ -38,10 +38,33 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   justify-items: center;
+  align-items: center;
 
   padding: 10px;
 }
 
 .tableItem:nth-of-type(odd) {
-    background-color: #e9ecef;
+  background-color: #e9ecef;
+}
+
+.first,
+.second,
+.third {
+  color: #fff;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+}
+
+.first {
+  background-color: #f7b538;
+}
+
+.second {
+  background-color: #db7c26;
+}
+
+.third {
+  background-color: #d8572a;
 }
