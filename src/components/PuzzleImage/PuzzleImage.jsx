@@ -11,9 +11,13 @@ function PuzzleImage({
   return (
     <div
       onClick={(e) => {
+        const element = e.target.getBoundingClientRect();
+        
         setTagged({
           x: e.nativeEvent.offsetX,
           y: e.nativeEvent.offsetY,
+          width: element.width,
+          height: element.height,
           center: { x: e.target.width / 2, y: e.target.height / 2 },
         });
       }}

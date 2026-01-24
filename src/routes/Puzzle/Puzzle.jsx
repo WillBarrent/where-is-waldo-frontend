@@ -75,8 +75,11 @@ function Puzzle() {
       coords.coordY,
     ]);
 
-    const x = tagged.x;
-    const y = tagged.y;
+    const xMult = puzzle.width / Math.round(tagged.width);
+    const yMult = puzzle.height / Math.round(tagged.height);
+
+    const x = tagged.x * xMult;
+    const y = tagged.y * yMult;
 
     for (
       let i = 0, j = coordinates.length - 1;
